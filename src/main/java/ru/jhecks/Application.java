@@ -23,18 +23,18 @@ public class Application {
         headers.set("Cookie", String.join(";",
                 Objects.requireNonNull(responseEntity.getHeaders().get("Set-Cookie"))));
 
-        User user1 = new User();
-        user1.setId(3L);
-        user1.setName("James");
-        user1.setLastName("Brown");
-        user1.setAge((byte) 73);
+        User user = new User();
+        user.setId(3L);
+        user.setName("James");
+        user.setLastName("Brown");
+        user.setAge((byte) 73);
 
-        HttpEntity<User> entity = new HttpEntity<>(user1, headers);
+        HttpEntity<User> entity = new HttpEntity<>(user, headers);
         System.out.print(restTemplate.exchange(URL, HttpMethod.POST, entity, String.class).getBody());
 
-        user1.setName("Thomas");
-        user1.setLastName("Shelby");
-        entity = new HttpEntity<>(user1, headers);
+        user.setName("Thomas");
+        user.setLastName("Shelby");
+        entity = new HttpEntity<>(user, headers);
         System.out.print(restTemplate.exchange(URL, HttpMethod.PUT, entity, String.class).getBody());
 
         System.out.print(restTemplate.exchange(URL + "/3", HttpMethod.DELETE, entity, String.class).getBody());
